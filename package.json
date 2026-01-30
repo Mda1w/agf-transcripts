@@ -1,0 +1,12 @@
+{
+  "name": "agf-transcript-server",
+  "version": "1.0.0",
+  "description": "AGF Ticket Transcript Server",
+  "main": "transcript-server.js",
+  "scripts": {
+    "start": "node transcript-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
