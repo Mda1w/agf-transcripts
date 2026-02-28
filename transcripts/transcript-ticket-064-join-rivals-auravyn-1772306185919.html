@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcript - ticket-064-join-rivals-auravyn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .header-content { max-width: 1400px; margin: 0 auto; }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .channel-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .header-meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        /* Info Panel */
+        .info-panel {
+            background: #1e293b;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .info-item {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        .info-label {
+            color: #94a3b8;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            color: #e2e8f0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        /* Messages */
+        .messages {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .message {
+            display: flex;
+            gap: 15px;
+            padding: 15px 20px;
+            margin-bottom: 2px;
+            transition: background 0.15s;
+        }
+        .message:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+        .message-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .author-name {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 15px;
+        }
+        .timestamp {
+            color: #64748b;
+            font-size: 12px;
+        }
+        .bot-badge {
+            background: #5865f2;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .message-text {
+            color: #cbd5e1;
+            word-wrap: break-word;
+            font-size: 15px;
+        }
+        .message-text a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        .message-text a:hover {
+            text-decoration: underline;
+        }
+        /* Attachments */
+        .attachments {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .attachment {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+        }
+        .attachment-icon {
+            width: 32px;
+            height: 32px;
+            background: #667eea;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .attachment-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .attachment-name {
+            color: #60a5fa;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .attachment-size {
+            color: #64748b;
+            font-size: 12px;
+        }
+        .attachment img {
+            max-width: 400px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        /* Embeds */
+        .embed {
+            background: #1e293b;
+            border-left: 4px solid #5865f2;
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            max-width: 520px;
+        }
+        .embed-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .embed-author-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .embed-author-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .embed-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+        .embed-description {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #1e293b;
+            margin-top: 40px;
+            color: #64748b;
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>
+                <span class="channel-icon">#</span>
+                ticket-064-join-rivals-auravyn
+            </h1>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span>🏢</span>
+                    <span>Аnti Gangs Forcе</span>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>2/28/2026</span>
+                </div>
+                <div class="meta-item">
+                    <span>💬</span>
+                    <span>22 Messages</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="info-panel">
+        <h3 style="margin-bottom: 15px; font-size: 18px;">📊 Ticket Information</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Ticket Number</div>
+                <div class="info-value">#064</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Opened By</div>
+                <div class="info-value">auravyn_</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Category</div>
+                <div class="info-value">Join AGF - Rivals</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Created</div>
+                <div class="info-value">2/24/2026, 6:12:26 AM</div>
+            </div>
+        </div>
+    </div>
+    <div class="messages">
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Feb 24, 2026, 6:12 AM</span>
+                </div>
+                <div class="message-text">@Auravyn | @Tickets Support</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:12 AM</span>
+                </div>
+                <div class="message-text">Beautiful</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:12 AM</span>
+                </div>
+                <div class="message-text">yez now have rivals tickets</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Feb 24, 2026, 6:12 AM</span>
+                </div>
+                <div class="message-text">fr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:13 AM</span>
+                </div>
+                <div class="message-text">I cant get past plat 2</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:13 AM</span>
+                </div>
+                <div class="message-text">Cuz of the god damn hackers</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:15 AM</span>
+                </div>
+                <div class="message-text">ofc dys bad</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:15 AM</span>
+                </div>
+                <div class="message-text">cs2 still on top tho</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:23 AM</span>
+                </div>
+                <div class="message-text">Nah</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:23 AM</span>
+                </div>
+                <div class="message-text">Og</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:23 AM</span>
+                </div>
+                <div class="message-text">Cs:go on top</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1199709751240577066/ee51d7fbeba7fdf770cafdae20c6f91b.webp?size=128" alt="Vexra_xx" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Vexra_xx</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:26 AM</span>
+                </div>
+                <div class="message-text">Nooo</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:28 AM</span>
+                </div>
+                <div class="message-text">still cs2 good</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:31 AM</span>
+                </div>
+                <div class="message-text">Fairs</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 6:36 AM</span>
+                </div>
+                <div class="message-text">i got kicked for team kill cuz my team trah</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 3:33 PM</span>
+                </div>
+                <div class="message-text">I lead ez</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Feb 24, 2026, 3:33 PM</span>
+                </div>
+                <div class="message-text">fr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1145707921636864061/338b35de42e8879aee15a399a9b10217.webp?size=128" alt="MDA1W" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">MDA1W</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 4:02 PM</span>
+                </div>
+                <div class="message-text">i mean yeah u can take rivals</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1145707921636864061/338b35de42e8879aee15a399a9b10217.webp?size=128" alt="MDA1W" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">MDA1W</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 4:04 PM</span>
+                </div>
+                <div class="message-text">@Auravyn u will accept ppl into rivals</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 4:04 PM</span>
+                </div>
+                <div class="message-text">Ez</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Feb 24, 2026, 4:04 PM</span>
+                </div>
+                <div class="message-text">fr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Feb 24, 2026, 4:04 PM</span>
+                </div>
+                <div class="message-text">Alr</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-logo">AGF Bot</div>
+        <p>Generated on 2/28/2026, 7:16:25 PM</p>
+        <p style="margin-top: 10px; font-size: 14px;">Transcript • Аnti Gangs Forcе</p>
+    </div>
+</body>
+</html>
