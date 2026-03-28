@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcript - ticket-175-join-erlc-poisonfarmer1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .header-content { max-width: 1400px; margin: 0 auto; }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .channel-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .header-meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        /* Info Panel */
+        .info-panel {
+            background: #1e293b;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .info-item {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        .info-label {
+            color: #94a3b8;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            color: #e2e8f0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        /* Messages */
+        .messages {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .message {
+            display: flex;
+            gap: 15px;
+            padding: 15px 20px;
+            margin-bottom: 2px;
+            transition: background 0.15s;
+        }
+        .message:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+        .message-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .author-name {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 15px;
+        }
+        .timestamp {
+            color: #64748b;
+            font-size: 12px;
+        }
+        .bot-badge {
+            background: #5865f2;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .message-text {
+            color: #cbd5e1;
+            word-wrap: break-word;
+            font-size: 15px;
+        }
+        .message-text a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        .message-text a:hover {
+            text-decoration: underline;
+        }
+        /* Attachments */
+        .attachments {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .attachment {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+        }
+        .attachment-icon {
+            width: 32px;
+            height: 32px;
+            background: #667eea;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .attachment-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .attachment-name {
+            color: #60a5fa;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .attachment-size {
+            color: #64748b;
+            font-size: 12px;
+        }
+        .attachment img {
+            max-width: 400px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        /* Embeds */
+        .embed {
+            background: #1e293b;
+            border-left: 4px solid #5865f2;
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            max-width: 520px;
+        }
+        .embed-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .embed-author-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .embed-author-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .embed-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+        .embed-description {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #1e293b;
+            margin-top: 40px;
+            color: #64748b;
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>
+                <span class="channel-icon">#</span>
+                ticket-175-join-erlc-poisonfarmer1
+            </h1>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span>🏢</span>
+                    <span>Аnti Gangs Forcе</span>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>3/28/2026</span>
+                </div>
+                <div class="meta-item">
+                    <span>💬</span>
+                    <span>85 Messages</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="info-panel">
+        <h3 style="margin-bottom: 15px; font-size: 18px;">📊 Ticket Information</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Ticket Number</div>
+                <div class="info-value">#175</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Opened By</div>
+                <div class="info-value">poison_farmer1</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Category</div>
+                <div class="info-value">Join AGF - ER:LC</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Created</div>
+                <div class="info-value">3/27/2026, 1:44:17 PM</div>
+            </div>
+        </div>
+    </div>
+    <div class="messages">
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Mar 27, 2026, 1:44 PM</span>
+                </div>
+                <div class="message-text">@poisonn (Death3_alt) | @Tickets Support | @Erlc lead</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 3:56 PM</span>
+                </div>
+                <div class="message-text">@poisonn (Death3_alt) icy likes egirls thats why he defends them</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 3:57 PM</span>
+                </div>
+                <div class="message-text">he collecting all the egirls in sc</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 3:58 PM</span>
+                </div>
+                <div class="message-text">also wasnt rhys hunting u down before?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 3:58 PM</span>
+                </div>
+                <div class="message-text">Yes</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 3:58 PM</span>
+                </div>
+                <div class="message-text">Ofc</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 3:58 PM</span>
+                </div>
+                <div class="message-text">Thats why he's defending my ex that's an e girl in SC</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 3:59 PM</span>
+                </div>
+                <div class="message-text">He was hunting me</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 3:59 PM</span>
+                </div>
+                <div class="message-text">But I was dodgin tbf</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 3:59 PM</span>
+                </div>
+                <div class="message-text">I wanted to join here bc ion wanna be in wc anymore due to my ex being in their</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:00 PM</span>
+                </div>
+                <div class="message-text">ye fair enough</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:00 PM</span>
+                </div>
+                <div class="message-text">he used to tell me abt hunting sc and i helped him out few times</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:01 PM</span>
+                </div>
+                <div class="message-text">i mean ive seen u play few times but not as much so i cant really determine ur skill level</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:01 PM</span>
+                </div>
+                <div class="message-text">ill ask rhys if he knows since he mostly hunts yall down he should know</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:05 PM</span>
+                </div>
+                <div class="message-text">I mean</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:05 PM</span>
+                </div>
+                <div class="message-text">I'm decent</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:05 PM</span>
+                </div>
+                <div class="message-text">I don't play much though</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:05 PM</span>
+                </div>
+                <div class="message-text">still got my skill in me</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:06 PM</span>
+                </div>
+                <div class="message-text">ask him</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:09 PM</span>
+                </div>
+                <div class="message-text">thats nice</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:10 PM</span>
+                </div>
+                <div class="message-text">i did just waiting for him to get online</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:10 PM</span>
+                </div>
+                <div class="message-text">he should be on</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:10 PM</span>
+                </div>
+                <div class="message-text">he's on invis mode</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:10 PM</span>
+                </div>
+                <div class="message-text">yep like me XD</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:11 PM</span>
+                </div>
+                <div class="message-text">unless he fr fr away from his device</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:11 PM</span>
+                </div>
+                <div class="message-text">alr he said ur good just need more improving</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:11 PM</span>
+                </div>
+                <div class="message-text">so ill give u @AGF Trainee</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:11 PM</span>
+                </div>
+                <div class="message-text">alr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:11 PM</span>
+                </div>
+                <div class="message-text">ok</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:11 PM</span>
+                </div>
+                <div class="message-text">sounds good</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:12 PM</span>
+                </div>
+                <div class="message-text">do I just say I need help if I got sc ppl in my game</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:12 PM</span>
+                </div>
+                <div class="message-text">u can get promoted by being active helping out in wars and there are other ways but mainly just for spies</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:12 PM</span>
+                </div>
+                <div class="message-text">alr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:12 PM</span>
+                </div>
+                <div class="message-text">yes u can use /backup and it will ping</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:12 PM</span>
+                </div>
+                <div class="message-text">alr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:12 PM</span>
+                </div>
+                <div class="message-text">but we just have a rule for it if u need backup it must be if ur outnumbered</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:13 PM</span>
+                </div>
+                <div class="message-text">as in 1v3 or higher</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:13 PM</span>
+                </div>
+                <div class="message-text">alr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:13 PM</span>
+                </div>
+                <div class="message-text">ion got enough robux for uniforms</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:13 PM</span>
+                </div>
+                <div class="message-text">😭</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:13 PM</span>
+                </div>
+                <div class="message-text">thats fine XD</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:13 PM</span>
+                </div>
+                <div class="message-text">im broke ash</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:13 PM</span>
+                </div>
+                <div class="message-text">u can join the group and pick a team in #🔰・agf-teams</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">I would join jailbreak team too but im ass at that game now</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">used to be goated at it</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">but ima stick to erlc</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">i mean we kinda closed it just need to remove it from that bot</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">ohh</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">alr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">cuz no one likes jailbreak that much anymore 🥀</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">tbh</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">its dead</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:14 PM</span>
+                </div>
+                <div class="message-text">all the youtubers even sayin its dying off</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:15 PM</span>
+                </div>
+                <div class="message-text">only one thats still open is rivals its mainly what most members play instead of erlc</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:15 PM</span>
+                </div>
+                <div class="message-text">yes they are</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:15 PM</span>
+                </div>
+                <div class="message-text">I know helloitsvg said its dead</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:15 PM</span>
+                </div>
+                <div class="message-text">myusernameisthis don't play anymore</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:15 PM</span>
+                </div>
+                <div class="message-text">looks like making seasons and new cars every update doesnt make ur game more active :SkullPray:</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:16 PM</span>
+                </div>
+                <div class="message-text">the thing is</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:16 PM</span>
+                </div>
+                <div class="message-text">asimo and badcc creating a new game</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:16 PM</span>
+                </div>
+                <div class="message-text">so they not doing as much fixing to jailbreak</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:16 PM</span>
+                </div>
+                <div class="message-text">idk most youtubers cuz i stopped playing it in like 2022</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:16 PM</span>
+                </div>
+                <div class="message-text">thats why its dying</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:16 PM</span>
+                </div>
+                <div class="message-text">bc they wont patch all the bugs like they used to</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:16 PM</span>
+                </div>
+                <div class="message-text">they used to be on top of those bugs</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:16 PM</span>
+                </div>
+                <div class="message-text">now its like they dont give 2 fucks</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:16 PM</span>
+                </div>
+                <div class="message-text">ye thats normally what happens to some games the devs move on to new projects and leave the old ones</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:17 PM</span>
+                </div>
+                <div class="message-text">yup</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:17 PM</span>
+                </div>
+                <div class="message-text">true</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:17 PM</span>
+                </div>
+                <div class="message-text">kinda like erlc but erlc only increases the bugs wit every update</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:17 PM</span>
+                </div>
+                <div class="message-text">they fix 1 bug just to create 3 others</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:17 PM</span>
+                </div>
+                <div class="message-text">idk how they even mange to do that</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:18 PM</span>
+                </div>
+                <div class="message-text">yup</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:18 PM</span>
+                </div>
+                <div class="message-text">also</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:18 PM</span>
+                </div>
+                <div class="message-text">sometimes I won't be online</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:18 PM</span>
+                </div>
+                <div class="message-text">bc I work</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:19 PM</span>
+                </div>
+                <div class="message-text">but I will let u know in dms if I work</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:19 PM</span>
+                </div>
+                <div class="message-text">mainly its monday through friday I work</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:20 PM</span>
+                </div>
+                <div class="message-text">u can make an loa request if ur gonna be gone for 3 days plus in #✈️・loa-requests</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:20 PM</span>
+                </div>
+                <div class="message-text">and we accept all of them dw XD</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:20 PM</span>
+                </div>
+                <div class="message-text">except if they are smth crazy like 1 month plus</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 4:26 PM</span>
+                </div>
+                <div class="message-text">lmk if u have any more questions if not ill be closing dys ticket and if u need any further info just dm me or open a ticket if im not online @poisonn (Death3_alt)</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 5:41 PM</span>
+                </div>
+                <div class="message-text">alr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/678738274336112682/1551f1c36e9cf17116922a8c168a1786.webp?size=128" alt="poisonn (Death3_alt)" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">poisonn (Death3_alt)</span>
+                    
+                    <span class="timestamp">Mar 27, 2026, 5:42 PM</span>
+                </div>
+                <div class="message-text">alr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 12:21 AM</span>
+                </div>
+                <div class="message-text">@poisonn (Death3_alt) can i close this ticket?</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-logo">AGF Bot</div>
+        <p>Generated on 3/28/2026, 12:44:18 AM</p>
+        <p style="margin-top: 10px; font-size: 14px;">Transcript • Аnti Gangs Forcе</p>
+    </div>
+</body>
+</html>
