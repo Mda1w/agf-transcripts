@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcript - ticket-185-join-erlc-rylan1221</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .header-content { max-width: 1400px; margin: 0 auto; }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .channel-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .header-meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        /* Info Panel */
+        .info-panel {
+            background: #1e293b;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .info-item {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        .info-label {
+            color: #94a3b8;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            color: #e2e8f0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        /* Messages */
+        .messages {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .message {
+            display: flex;
+            gap: 15px;
+            padding: 15px 20px;
+            margin-bottom: 2px;
+            transition: background 0.15s;
+        }
+        .message:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+        .message-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .author-name {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 15px;
+        }
+        .timestamp {
+            color: #64748b;
+            font-size: 12px;
+        }
+        .bot-badge {
+            background: #5865f2;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .message-text {
+            color: #cbd5e1;
+            word-wrap: break-word;
+            font-size: 15px;
+        }
+        .message-text a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        .message-text a:hover {
+            text-decoration: underline;
+        }
+        /* Attachments */
+        .attachments {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .attachment {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+        }
+        .attachment-icon {
+            width: 32px;
+            height: 32px;
+            background: #667eea;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .attachment-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .attachment-name {
+            color: #60a5fa;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .attachment-size {
+            color: #64748b;
+            font-size: 12px;
+        }
+        .attachment img {
+            max-width: 400px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        /* Embeds */
+        .embed {
+            background: #1e293b;
+            border-left: 4px solid #5865f2;
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            max-width: 520px;
+        }
+        .embed-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .embed-author-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .embed-author-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .embed-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+        .embed-description {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #1e293b;
+            margin-top: 40px;
+            color: #64748b;
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>
+                <span class="channel-icon">#</span>
+                ticket-185-join-erlc-rylan1221
+            </h1>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span>🏢</span>
+                    <span>Аnti Gangs Forcе</span>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>3/30/2026</span>
+                </div>
+                <div class="meta-item">
+                    <span>💬</span>
+                    <span>78 Messages</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="info-panel">
+        <h3 style="margin-bottom: 15px; font-size: 18px;">📊 Ticket Information</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Ticket Number</div>
+                <div class="info-value">#185</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Opened By</div>
+                <div class="info-value">rylan_1221</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Category</div>
+                <div class="info-value">Join AGF - ER:LC</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Created</div>
+                <div class="info-value">3/28/2026, 6:48:14 PM</div>
+            </div>
+        </div>
+    </div>
+    <div class="messages">
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Mar 28, 2026, 6:48 PM</span>
+                </div>
+                <div class="message-text">@𝓡𝓡_𝓡𝓨𝓛𝓐𝓝 | @Tickets Support | <@&1475889518170214431></div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Mar 28, 2026, 6:48 PM</span>
+                </div>
+                <div class="message-text">✅ @Nathan has been added to the ticket by @Kris.</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1139892023495762061/1b0790929de40c18445faf3e2a7c9167.webp?size=128" alt="Nathan" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Nathan</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 6:49 PM</span>
+                </div>
+                <div class="message-text">i can record a vid of him helping me</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1145707921636864061/338b35de42e8879aee15a399a9b10217.webp?size=128" alt="Just Mda" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Just Mda</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 6:49 PM</span>
+                </div>
+                <div class="message-text">@𝓡𝓡_𝓡𝓨𝓛𝓐𝓝 so u found out about agf from ur friend?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 6:50 PM</span>
+                </div>
+                <div class="message-text">Yea i found it out from poison</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1139892023495762061/1b0790929de40c18445faf3e2a7c9167.webp?size=128" alt="Nathan" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Nathan</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 6:50 PM</span>
+                </div>
+                <div class="message-text">he found out from me and poison</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1139892023495762061/1b0790929de40c18445faf3e2a7c9167.webp?size=128" alt="Nathan" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Nathan</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 6:51 PM</span>
+                </div>
+                <div class="message-text">i told him about it</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1145707921636864061/338b35de42e8879aee15a399a9b10217.webp?size=128" alt="Just Mda" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Just Mda</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 6:57 PM</span>
+                </div>
+                <div class="message-text">lwk but ur xp is so low is this ur alt or smthn?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 6:58 PM</span>
+                </div>
+                <div class="message-text">Nah its my main i js dont usally do police team but i can grind my xp if i need to</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1145707921636864061/338b35de42e8879aee15a399a9b10217.webp?size=128" alt="Just Mda" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Just Mda</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:00 PM</span>
+                </div>
+                <div class="message-text">can u please wait for this guy to respond</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1145707921636864061/338b35de42e8879aee15a399a9b10217.webp?size=128" alt="Just Mda" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Just Mda</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:00 PM</span>
+                </div>
+                <div class="message-text">@F4jz</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:00 PM</span>
+                </div>
+                <div class="message-text">Yea</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:05 PM</span>
+                </div>
+                <div class="message-text">https://www.roblox.com/share?code=_4oiaqbdkqhjyw252kb4noyf263fophz7uozm114o4hwhoc14f&type=ExperienceInvite</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:05 PM</span>
+                </div>
+                <div class="message-text">join and go cop and arrest the people with k1ll name</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:05 PM</span>
+                </div>
+                <div class="message-text">i wanna see how good u are</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:06 PM</span>
+                </div>
+                <div class="message-text">Ok</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1139892023495762061/1b0790929de40c18445faf3e2a7c9167.webp?size=128" alt="Nathan" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Nathan</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:06 PM</span>
+                </div>
+                <div class="message-text">the link is expired</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/906900009109319710/180822a5a0c89c32f4019618cbc1d803.webp?size=128" alt="Kris" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Kris</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:06 PM</span>
+                </div>
+                <div class="message-text">just press join</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:06 PM</span>
+                </div>
+                <div class="message-text">I cant do it rn</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:06 PM</span>
+                </div>
+                <div class="message-text">I'm not home I'm out eating and goin to skatetown</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:06 PM</span>
+                </div>
+                <div class="message-text">Can i do it when i get back?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:07 PM</span>
+                </div>
+                <div class="message-text">ok</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:07 PM</span>
+                </div>
+                <div class="message-text">And i may be slow at it because I'm a console player idk when I'm gettin a PC</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:09 PM</span>
+                </div>
+                <div class="message-text">I could easily tase them and get them in handcuffs</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:10 PM</span>
+                </div>
+                <div class="message-text">will see</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:11 PM</span>
+                </div>
+                <div class="message-text">Ok I'll be home late tn prob</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:12 PM</span>
+                </div>
+                <div class="message-text">alr</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Mar 28, 2026, 7:20 PM</span>
+                </div>
+                <div class="message-text">🚫 @Nathan has been removed from the ticket by @F4jz.</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 28, 2026, 7:27 PM</span>
+                </div>
+                <div class="message-text">I came in war with yall earlier i was the one ES person but i left ES i js havent been in the game to change my tag</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 1:21 AM</span>
+                </div>
+                <div class="message-text">If theres still k1ll ppl on i can do it in like an hour</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Mar 29, 2026, 2:01 AM</span>
+                </div>
+                <div class="message-text">✅ @Nathan has been added to the ticket by @Just Mda.</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:30 AM</span>
+                </div>
+                <div class="message-text">@Just Mda what do u want with nathan for</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1145707921636864061/338b35de42e8879aee15a399a9b10217.webp?size=128" alt="Just Mda" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Just Mda</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:32 AM</span>
+                </div>
+                <div class="message-text">he told me to add him into the ticket</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:32 AM</span>
+                </div>
+                <div class="message-text">what for</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/734184213175205990/a_2d6be7cf437962238967f0beb913dd81.gif?size=128" alt="swjk." class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">swjk.</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:46 AM</span>
+                </div>
+                <div class="message-text">@𝓡𝓡_𝓡𝓨𝓛𝓐𝓝 we will do a skills test on u in priv server or let u join wit us in a war to see ur skills since we dont know ur skill level yet</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 2:53 PM</span>
+                </div>
+                <div class="message-text">Ok</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 2:55 PM</span>
+                </div>
+                <div class="message-text">join AGFhim</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 2:57 PM</span>
+                </div>
+                <div class="message-text">Lemme get outta bed first</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 3:18 PM</span>
+                </div>
+                <div class="message-text">Bruhh i forgot i have no tasers</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 3:27 PM</span>
+                </div>
+                <div class="message-text">you dont have 500 xp?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 3:27 PM</span>
+                </div>
+                <div class="message-text">Not yet cuz i dont usally do cop team when i play</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 3:27 PM</span>
+                </div>
+                <div class="message-text">then be a criminal</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 3:28 PM</span>
+                </div>
+                <div class="message-text">Ok</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 6:24 PM</span>
+                </div>
+                <div class="message-text">let me know if youre active so we do the test</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 6:25 PM</span>
+                </div>
+                <div class="message-text">I am now</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 6:26 PM</span>
+                </div>
+                <div class="message-text">I grinded up for taser so i have it now</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:42 PM</span>
+                </div>
+                <div class="message-text">What we gonna do abt my skill test</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:46 PM</span>
+                </div>
+                <div class="message-text">im in a war</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:46 PM</span>
+                </div>
+                <div class="message-text">are you able to join me</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:49 PM</span>
+                </div>
+                <div class="message-text">U can add me</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:57 PM</span>
+                </div>
+                <div class="message-text">are you a mobile player</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:58 PM</span>
+                </div>
+                <div class="message-text">No</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 8:58 PM</span>
+                </div>
+                <div class="message-text">I'm a console player</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:00 PM</span>
+                </div>
+                <div class="message-text">User: RylanER1221</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:07 PM</span>
+                </div>
+                <div class="message-text">alright @Training Instructor will come to test your skills as soon as possible</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:07 PM</span>
+                </div>
+                <div class="message-text">Ok</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:33 PM</span>
+                </div>
+                <div class="message-text">@F4jz do i do my test in this server?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1466012775397462192/56534256d60fd8d7a55abc764ef35e5e.webp?size=128" alt="AGF BOT" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">AGF BOT</span>
+                    <span class="bot-badge">BOT</span>
+                    <span class="timestamp">Mar 29, 2026, 9:33 PM</span>
+                </div>
+                <div class="message-text">✅ @Cherish has been added to the ticket by @F4jz.</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:34 PM</span>
+                </div>
+                <div class="message-text">@Cherish youre a trainer plz test his skills in erlc use AGFhim if u wanna a priv server if hes bad then assign him to intellgience division</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1230644457955786823/a_4064f6be4b66b30a164a12731296609e.gif?size=128" alt="Cherish" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Cherish</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:35 PM</span>
+                </div>
+                <div class="message-text">rn?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:36 PM</span>
+                </div>
+                <div class="message-text">Yea u better do it while I'm on</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1230644457955786823/a_4064f6be4b66b30a164a12731296609e.gif?size=128" alt="Cherish" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Cherish</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:37 PM</span>
+                </div>
+                <div class="message-text">ok go AGFhim</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:38 PM</span>
+                </div>
+                <div class="message-text">Joinin rn</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:39 PM</span>
+                </div>
+                <div class="message-text">Crim or cop?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1230644457955786823/a_4064f6be4b66b30a164a12731296609e.gif?size=128" alt="Cherish" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Cherish</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:39 PM</span>
+                </div>
+                <div class="message-text">you cop</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:39 PM</span>
+                </div>
+                <div class="message-text">Ok</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1230644457955786823/a_4064f6be4b66b30a164a12731296609e.gif?size=128" alt="Cherish" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Cherish</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:41 PM</span>
+                </div>
+                <div class="message-text">you coming?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:46 PM</span>
+                </div>
+                <div class="message-text">My fckin fingers is slippin like hell..</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1230644457955786823/a_4064f6be4b66b30a164a12731296609e.gif?size=128" alt="Cherish" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Cherish</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:46 PM</span>
+                </div>
+                <div class="message-text">lol its fine</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:47 PM</span>
+                </div>
+                <div class="message-text">My fingers are numb...</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:49 PM</span>
+                </div>
+                <div class="message-text">youre pre accepted in the intelligence division @Intelligence Personnel rank please wait for the final approval from @Director of Intelligence</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:51 PM</span>
+                </div>
+                <div class="message-text">Better then nun</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:51 PM</span>
+                </div>
+                <div class="message-text">I'll take it</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 9:52 PM</span>
+                </div>
+                <div class="message-text">Am i able to rank up if i get better?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1481062741270597632/842ed15204b0c5478034778dbbbc74a0.webp?size=128" alt="F4jz" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">F4jz</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 10:05 PM</span>
+                </div>
+                <div class="message-text">yup</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1161783704306339870/142a5296e071da70830456a5499dbf63.webp?size=128" alt="𝓡𝓡_𝓡𝓨𝓛𝓐𝓝" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">𝓡𝓡_𝓡𝓨𝓛𝓐𝓝</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 10:33 PM</span>
+                </div>
+                <div class="message-text">Can i get my roles now?</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 10:38 PM</span>
+                </div>
+                <div class="message-text">@𝓡𝓡_𝓡𝓨𝓛𝓐𝓝  add me back</div>
+            </div>
+        </div>
+        <div class="message">
+            <img src="https://cdn.discordapp.com/avatars/1354111147028119713/0e4a8d01d8216792c824e612155a1c89.webp?size=128" alt="Auravyn" class="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="author-name">Auravyn</span>
+                    
+                    <span class="timestamp">Mar 29, 2026, 10:40 PM</span>
+                </div>
+                <div class="message-text">id appreciate if you would be faster</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-logo">AGF Bot</div>
+        <p>Generated on 3/30/2026, 12:36:31 AM</p>
+        <p style="margin-top: 10px; font-size: 14px;">Transcript • Аnti Gangs Forcе</p>
+    </div>
+</body>
+</html>
